@@ -1,0 +1,15 @@
+{
+  "name": "LINEMAEW-Backend",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": "https://github.com/LINEMAEW/LINEMAEW-Backend.git",
+  "author": "Tezigudo <80502090+Tezigudo@users.noreply.github.com>",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
+  }
+}
