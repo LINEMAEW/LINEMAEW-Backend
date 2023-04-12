@@ -2,6 +2,7 @@
 
 require('dotenv').config()
 const sql = require('mssql');
+const util = require('util');
 
 const config = {
     user: process.env.DB_USER,
@@ -17,33 +18,29 @@ const config = {
 
 
 async function query(res, queries) {
-    const pool = new sql.ConnectionPool(config)
-    let req = new sql.Request(pool)
+    const pool = new sql.ConnectionPool(config);
+    const req = new sql.Request(pool);
 
-    pool.connect(async (err) => {
-        if (err) {
-            console.error(err);
-            return;
+    try {
+        await pool.connect();
+        const result = await util.promisify(req.query).call(req, queries);
+
+        if (result.recordset.length > 0) {
+            console.log(result.recordset);
+            return result.recordset;
+        } else {
+            console.log('There is no data in the table');
+            return [];
         }
-        await req.query(queries, (err, data) => {
-            if (err) {
-                console.error(err);
-                res.status(500).json(err);
-                return;
-            }
-            if (data.rowsAffected.length > 0) {
-                const dataSQL = data.recordset;
-                console.log(dataSQL);
-                res.json(dataSQL);
-                return dataSQL
-            } else {
-                console.log('There is no data in the table');
-            }
-
-            pool.close();
-        });
-    })
+    } catch (err) {
+        console.error(err);
+        res.status(500).json(err);
+        throw err;
+    } finally {
+        pool.close();
+    }
 }
+
 
 
 module.exports = query;
