@@ -9,7 +9,10 @@
   "author": "Tezigudo <80502090+Tezigudo@users.noreply.github.com>",
   "license": "MIT",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "express-validator": "^6.15.0",
+    "mssql": "^9.1.1"
   }
 }
