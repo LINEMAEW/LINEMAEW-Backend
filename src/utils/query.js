@@ -16,16 +16,16 @@ const config = {
     }
 }
 
+const pool = new sql.ConnectionPool(config);
 
 async function query(res, queries) {
-    const pool = new sql.ConnectionPool(config);
     const req = new sql.Request(pool);
 
     try {
         await pool.connect();
-        const result = await util.promisify(req.query).call(req, queries);
+        const result = await req.query(queries)
 
-        if (result.recordset.length > 0) {
+        if (result.recordsets.length > 0) {
             console.log(result.recordset);
             return result.recordset;
         } else {

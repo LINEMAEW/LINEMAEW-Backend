@@ -15,7 +15,7 @@ router.get('/all', async (req, res) => {
 });
 
 router.get('/:id/allmenus', async (req, res) => {
-    const menus = await Menus.getAllMenus(req.params.id, res);
+    const menus = await Menus.getAllMenus(req, res);
     res.status(200).send({"all_menus": menus});
 })
 

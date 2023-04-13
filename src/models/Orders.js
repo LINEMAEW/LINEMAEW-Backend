@@ -1,11 +1,24 @@
 const query = require('../utils/query');
 
 async function getAllOrders(req, res) {
-    const queries = `SELECT * FROM Orders WHERE user_id=${req}`;
+    const queries = `SELECT * FROM Orders WHERE user_id=${req.body.user_id}`;
+    return await query(res, queries);
+}
+
+async function setOrderStatus(req, res) {
+    const body = {
+        user_id: req.body.user_id,
+        order_id: req.body.order_id,
+        delivery_status: req.body.delivery_status
+    };
+    const queries = `UPDATE Orders 
+                     SET delivery_status='${body.delivery_status}'
+                     WHERE user_id=${body.user_id} AND order_id=${body.order_id}`;
     return await query(res, queries);
 }
 
 
 module.exports = {
-    getAllOrders
+    getAllOrders,
+    setOrderStatus
 }
