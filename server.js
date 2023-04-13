@@ -1,12 +1,14 @@
-let express = require('express');
-let cors = require('cors');
-let test = require('./src/routes/SomeRoute');
-
-let app = express();
+'use strict'
 
 require('dotenv').config()
-app.use(cors());
 
-app.use('/SomeRoute', test)
+const http = require('http')
+const app = require('./src/app')
 
-app.listen(process.env.PORT, () => console.log(`server is running on port ${PORT}`))
+const server = http.createServer(app)
+
+server.listen(3000, () => {
+    console.log('Server started on port 3000')
+})
+
+
