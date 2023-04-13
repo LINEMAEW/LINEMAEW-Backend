@@ -19,7 +19,7 @@ router.get('/:id/allmenus', async (req, res) => {
 })
 
 router.post('/:id/add_menu', async (req, res) => {
-    res.status(200).send(await Menus.addMenu(req, res));
+    await Menus.addMenu(req, res);
 })
 
 module.exports = router;
