@@ -11,10 +11,10 @@ async function setOrderStatus(req, res) {
         order_id: req.body.order_id,
         delivery_status: req.body.delivery_status
     };
-    const queries = `UPDATE Orders 
+    const updated = `UPDATE Orders 
                      SET delivery_status='${body.delivery_status}'
                      WHERE user_id=${body.user_id} AND order_id=${body.order_id}`;
-    return await query(res, queries);
+    return await query(res, updated);
 }
 
 

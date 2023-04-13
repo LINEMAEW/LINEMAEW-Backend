@@ -19,4 +19,8 @@ router.get('/:id/allmenus', async (req, res) => {
     res.status(200).send({"all_menus": menus});
 })
 
+router.post('/:id/add_menu', async (req, res) => {
+    await Menus.addMenu(req, res);
+})
+
 module.exports = router;
