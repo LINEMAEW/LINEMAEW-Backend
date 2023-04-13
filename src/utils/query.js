@@ -42,5 +42,4 @@ async function query(res, queries) {
 }
 
 
-
 module.exports = query;
