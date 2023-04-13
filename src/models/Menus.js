@@ -17,7 +17,13 @@ async function addMenu(req, res) {
     return await query(res, inserted);
 }
 
+async function deleteMenu(req, res) {
+    const deleted = `DELETE FROM Menu_items WHERE item_id=${req.params.id}`;
+    return await query(res, deleted);
+}
+
 module.exports = {
     getAllMenus,
-    addMenu
+    addMenu,
+    deleteMenu
 }

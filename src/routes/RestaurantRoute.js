@@ -10,8 +10,7 @@ router.get('/all', async (req, res) => {
     // res.status(200).send(JSON.stringify({
     // "all_restaurants": filtered_restaurants
     // }));
-
-    res.status(200).send(restaurants);
+    res.status(200).send({"all_restaurants": restaurants});
 });
 
 router.get('/:id/allmenus', async (req, res) => {
