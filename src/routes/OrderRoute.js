@@ -13,7 +13,7 @@ router.post('/ordering', async (req, res) => {
 })
 
 router.put('/setStatus', async (req, res) => {
-    await Orders.setOrderStatus(req, res);
+    res.status(200).send(await Orders.setOrderStatus(req, res));
     // not finished
 })
 
