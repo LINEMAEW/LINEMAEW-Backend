@@ -5,7 +5,7 @@ const router = require('express').Router();
 
 
 router.use('/restaurants', RestaurantRouter);
-router.use('/allOrders', OrdersRouter);
+router.use('/orders', OrdersRouter);
 
 
 module.exports = router;

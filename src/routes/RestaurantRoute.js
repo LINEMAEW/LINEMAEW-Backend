@@ -1,6 +1,6 @@
 const express = require('express');
-const Restaurants = require('../models/Restaurants')
-
+const Restaurants = require('../models/Restaurants');
+const Menus = require('../models/Menus')
 
 const router = express.Router();
 
@@ -13,5 +13,10 @@ router.get('/all', async (req, res) => {
 
     res.status(200).send(restaurants);
 });
+
+router.get('/:id/allmenus', async (req, res) => {
+    const menus = await Menus.getAllMenus(req.params.id, res);
+    res.status(200).send({"all_menus": menus});
+})
 
 module.exports = router;
