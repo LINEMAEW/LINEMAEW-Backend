@@ -14,7 +14,7 @@ router.post('/ordering', async (req, res) => {
 
 router.put('/setStatus', async (req, res) => {
     await Orders.setOrderStatus(req, res);
-    // not finished
+    res.status(200).send("Updated order status");
 })
 
 module.exports = router;

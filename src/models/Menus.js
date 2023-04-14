@@ -14,12 +14,12 @@ async function addMenu(req, res) {
     };
     const inserted = `INSERT INTO Menu_items(restaurant_id, menu_name, menu_description, price) 
                     VALUES (${parseInt(body.restaurant_id)}, '${body.menu_name}', '${body.description}', ${parseInt(body.price)})`;
-    return await query(res, inserted);
+    return await query(res, inserted, 'POST');
 }
 
 async function deleteMenu(req, res) {
     const deleted = `DELETE FROM Menu_items WHERE item_id=${req.params.id}`;
-    return await query(res, deleted);
+    return await query(res, deleted, 'DELETE');
 }
 
 module.exports = {

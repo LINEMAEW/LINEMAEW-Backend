@@ -18,25 +18,27 @@ const config = {
 
 const pool = new sql.ConnectionPool(config);
 
-async function query(res, queries) {
+async function query(res, queries, type='GET') {
     const req = new sql.Request(pool);
 
     try {
         await pool.connect();
-        const result = await req.query(queries)
-
-        if (result.recordsets.length > 0) {
-            console.log(result.recordset);
-            return result.recordset;
-        } else {
-            console.log('There is no data in the table');
-            return [];
-        }
+        var result = await req.query(queries)
+        if (type=='GET') {
+            if (result.recordsets.length > 0) {
+                console.log(result.recordset);
+                return result.recordset;
+            } 
+                console.log('There is no data in the table');
+                return [];
+        } 
     } catch (err) {
         console.error(err);
         res.status(500).json(err);
         throw err;
     } finally {
+        console.log(`${type} successfully`);
+        console.log("Rows affected: ", result.rowsAffected[0])
         pool.close();
     }
 }

@@ -5,6 +5,18 @@ async function getAllOrders(req, res) {
     return await query(res, queries);
 }
 
+async function orderSpecificRestaurants(req, res) {
+    const body = {
+        user_id: req.body.user_id,
+        restaurant_id: req.body.restaurant_id,
+        menus: [{
+            // item_id: ,
+            // quantity:
+        }]
+    };
+
+}
+
 async function setOrderStatus(req, res) {
     const body = {
         user_id: req.body.user_id,
@@ -14,7 +26,7 @@ async function setOrderStatus(req, res) {
     const updated = `UPDATE Orders 
                      SET delivery_status='${body.delivery_status}'
                      WHERE user_id=${body.user_id} AND order_id=${body.order_id}`;
-    return await query(res, updated);
+    return await query(res, updated, 'PUT');
 }
 
 
