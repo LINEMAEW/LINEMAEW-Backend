@@ -3,7 +3,7 @@
 const query = require('../utils/query');
 
 async function getAllRestaurants(req, res) {
-    const queries = `SELECT restaurant_name, description FROM Restaurants`;
+    const queries = `SELECT restaurant_name, restaurant_description AS description FROM Restaurants`;
     return await query(res, queries);
 }
 
