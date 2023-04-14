@@ -1,7 +1,8 @@
 {
   "name": "LINEMAEW-Backend",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "build": "node server.js"
   },
   "version": "1.0.0",
   "main": "server.js",
