@@ -31,14 +31,15 @@ async function query(res, queries, type='GET') {
             } 
                 console.log('There is no data in the table');
                 return [];
-        } 
+        }
+        console.log("Rows affected: ", result.rowsAffected[0])
     } catch (err) {
         console.error(err);
         res.status(500).json(err);
         throw err;
     } finally {
+        // console.log(result.recordset);
         console.log(`${type} successfully`);
-        console.log("Rows affected: ", result.rowsAffected[0])
         pool.close();
     }
 }

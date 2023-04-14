@@ -9,7 +9,7 @@ router.get('/allOrders', async (req, res) => {
 })
 
 router.post('/ordering', async (req, res) => {
-
+    await Orders.orderSpecificRestaurants(req, res);
 })
 
 router.put('/setStatus', async (req, res) => {
