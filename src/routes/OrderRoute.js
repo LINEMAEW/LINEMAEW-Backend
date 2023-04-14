@@ -10,11 +10,12 @@ router.get('/allOrders', async (req, res) => {
 
 router.post('/ordering', async (req, res) => {
     await Orders.orderSpecificRestaurants(req, res);
+    res.status(200).send("Ordering Menus.")
 })
 
 router.put('/setStatus', async (req, res) => {
     await Orders.setOrderStatus(req, res);
-    res.status(200).send("Updated order status");
+    res.status(200).send("Updated order status.");
 })
 
 module.exports = router;
