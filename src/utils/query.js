@@ -2,7 +2,7 @@
 
 require('dotenv').config()
 const sql = require('mssql');
-const util = require('util');
+
 
 const config = {
     user: process.env.DB_USER,
@@ -12,25 +12,25 @@ const config = {
 
     options: {
         trustServerCertificate: true,
-        encrypt: false
+        encrypt: true
     }
 }
 
 const pool = new sql.ConnectionPool(config);
 
-async function query(res, queries, type='GET') {
+async function query(res, queries, type = 'GET') {
     const req = new sql.Request(pool);
 
     try {
         await pool.connect();
         var result = await req.query(queries)
-        if (type=='GET') {
+        if (type == 'GET') {
             if (result.recordsets.length > 0) {
                 console.log(result.recordset);
                 return result.recordset;
-            } 
-                console.log('There is no data in the table');
-                return [];
+            }
+            console.log('There is no data in the table');
+            return [];
         }
         console.log("Rows affected: ", result.rowsAffected[0])
     } catch (err) {
