@@ -19,13 +19,13 @@ async function orderSpecificRestaurants(req, res) {
         WHERE item_id=${item["item_id"]}
         AND restaurant_id=${body.restaurant_id}`
         let results = await query(res, queries);
-        return results[0].price * item.quantity;        
+        return results[0].price * item.quantity;
     }
     let totalPrice = 0;
     const insertToOrders = `INSERT INTO Orders(user_id, restaurant_id, order_date, total_price, payment_status) 
                             VALUES(${body.user_id}, ${body.restaurant_id}, '${body.order_date}', ${totalPrice}, 1)`;
     await query(res, insertToOrders, 'POST');
-    for (let i = 0; i < body.menus.length; i++){
+    for (let i = 0; i < body.menus.length; i++) {
         totalPrice += await calculatePrice(body.menus[i]);
         console.log("Price:", totalPrice);
         let queries = `SELECT * FROM Orders WHERE order_date='${body.order_date}'`;
