@@ -7,10 +7,10 @@ const router = require('express').Router();
 
 const redirectIfAuth = require('../middlewares/redirectIfAuth');
 
-router.use('/restaurants', RestaurantRouter);
-router.use('/orders', OrdersRouter);
-router.use('/menus', MenusRouter);
-router.use('/users', redirectIfAuth, UsersRouter);
+router.use('/restaurant', RestaurantRouter);
+router.use('/order', OrdersRouter);
+router.use('/menu', MenusRouter);
+router.use('/user', redirectIfAuth, UsersRouter);
 
 
 module.exports = router;

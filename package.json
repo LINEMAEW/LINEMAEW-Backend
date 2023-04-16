@@ -1,7 +1,8 @@
 {
   "name": "LINEMAEW-Backend",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "build": "node server.js"
   },
   "version": "1.0.0",
   "main": "server.js",
@@ -16,8 +17,7 @@
     "express": "^4.18.2",
     "express-session": "^1.17.3",
     "express-validator": "^6.15.0",
-    "mssql": "^9.1.1",
-    "util": "^0.12.5"
+    "mssql": "^9.1.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"

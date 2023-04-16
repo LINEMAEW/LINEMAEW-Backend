@@ -18,18 +18,17 @@ async function orderSpecificRestaurants(req, res) {
         WHERE item_id=${item["item_id"]}
         AND restaurant_id=${body.restaurant_id}`
         let results = await query(res, queries);
-        return results[0].price * item.quantity;        
+        return results[0].price * item.quantity;
     }
     let totalPrice = 0;
     const insertToOrders = `INSERT INTO Orders(user_id, restaurant_id, order_date, total_price, payment_status) 
                             VALUES(${body.user_id}, ${body.restaurant_id}, '${body.order_date}', ${totalPrice}, 1)`;
     await query(res, insertToOrders, 'POST');
-    for (let i = 0; i < body.menus.length; i++){
+    for (let i = 0; i < body.menus.length; i++) {
         totalPrice += await calculatePrice(body.menus[i]);
         console.log("Price:", totalPrice);
         let queries = `SELECT * FROM Orders WHERE order_date='${body.order_date}'`;
         let results = await query(res, queries);
-        // console.log(results);
         const insertToOrdersItems = `INSERT INTO Orders_items(order_id, item_id, quantity)
                     VALUES (${results[0].order_id}, ${body.menus[i].item_id}, ${body.menus[i].quantity})`;
         await query(res, insertToOrdersItems, 'POST')
@@ -50,9 +49,15 @@ async function setOrderStatus(req, res) {
     return await query(res, updated, 'PUT');
 }
 
+async function getOrderDetail(req, res) {
+    const queries = `SELECT menu_name, quantity FROM Orders_items, Menu_items WHERE order_id=${req.params.id} AND Orders_items.item_id=Menu_items.item_id`;
+    return await query(res, queries);
+}
+
 
 module.exports = {
     getAllOrders,
     orderSpecificRestaurants,
-    setOrderStatus
+    setOrderStatus,
+    getOrderDetail
 }

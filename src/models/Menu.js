@@ -22,8 +22,26 @@ async function deleteMenu(req, res) {
     return await query(res, deleted, 'DELETE');
 }
 
+async function editMenu(req, res) {
+    const body = {
+        "menu_name": req.body.menu_name,
+        "description": req.body.description,
+        "price": req.body.price
+    };
+    const updated = `UPDATE Menu_items SET menu_name='${body.menu_name}', menu_description='${body.description}', price=${body.price} WHERE item_id=${req.params.id}`;
+    return await query(res, updated, 'PUT');
+}
+
+async function getMenuDetail(req, res) {
+    const queries = `SELECT menu_name AS name, menu_description AS description, price FROM Menu_items WHERE item_id=${req.params.id}`;
+    return await query(res, queries);
+}
+
+
 module.exports = {
     getAllMenus,
     addMenu,
-    deleteMenu
+    editMenu,
+    deleteMenu,
+    getMenuDetail
 }
