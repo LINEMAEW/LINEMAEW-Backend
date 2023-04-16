@@ -8,7 +8,7 @@ async function getUser(req, res) {
         password: req.body.password
     }
     console.log(body);
-    bcrypt.hash(body.password, parseInt(process.env.SALTROUNDS)).then(hash => {
+    await bcrypt.hash(body.password, parseInt(process.env.SALTROUNDS)).then(hash => {
         body.password = hash;
     }).catch(error => {
         console.log(error);
@@ -44,17 +44,17 @@ async function createUser(req, res) {
     return await query(res, queries, 'POST');
 }
 
-async function updaterestaurant({restaurant_name, restaurant_description, phone_number, address, password}, res) {
+// async function updaterestaurant({restaurant_name, restaurant_description, phone_number, address, password}, res) {
 
-    await bcrypt.hash(password, parseInt(process.env.SALTROUNDS)).then(hash => {
-        password = hash;
-    }).catch(error => {
-        console.log(error);
-    });
+//     await bcrypt.hash(password, parseInt(process.env.SALTROUNDS)).then(hash => {
+//         password = hash;
+//     }).catch(error => {
+//         console.log(error);
+//     });
 
-    const queries = `UPDATE Restaurants SET restaurant_name='${restaurant_name}', restaurant_description='${restaurant_description}', phone_number='${phone_number}', address='${address}', password='${password}' WHERE restaurant_name='${restaurant_name}'`;
-    return await query(res, queries, 'PUT');
-}
+//     const queries = `UPDATE Restaurants SET restaurant_name='${restaurant_name}', restaurant_description='${restaurant_description}', phone_number='${phone_number}', address='${address}', password='${password}' WHERE restaurant_name='${restaurant_name}'`;
+//     return await query(res, queries, 'PUT');
+// }
 
 // async function nothing(req, res){
 //     const queries = `SELECT * FROM Restaurants`;

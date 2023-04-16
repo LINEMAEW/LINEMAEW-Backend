@@ -9,19 +9,19 @@ async function getAllRestaurants(req, res) {
     return await query(res, queries);
 }
 
-
 async function getSpecificRestaurant(req, res) {
     const body = {
         restaurant_name: req.body.restaurant_name,
         password: req.body.password
     }
-    bcrypt.hash(body.password, parseInt(process.env.SALTROUNDS)).then(hash => {
+    await bcrypt.hash(body.password, parseInt(process.env.SALTROUNDS)).then(hash => {
         body.password = hash;
+        console.log(body.password)
     }).catch(error => {
         console.log(error);
     });
     const queries = `SELECT restaurant_name, password FROM Restaurants 
-                    WHERE restaurant_name=${body.restaurant_name} AND password=${body.password}`;
+                    WHERE restaurant_name='${body.restaurant_name}' AND password='${body.password}'`;
     return await query(res, queries);
 }
 
@@ -39,14 +39,14 @@ async function createRestaurant(req, res) {
         address: req.body.address,
         password: req.body.password
     }
-    bcrypt.hash(body.password, parseInt(process.env.SALTROUNDS)).then(hash => {
+    await bcrypt.hash(body.password, parseInt(process.env.SALTROUNDS)).then(hash => {
         body.password = hash;
     }).catch(error => {
         console.log(error);
     });
     const queries = `INSERT INTO Restaurants (restaurant_name, restaurant_description, phone_number, address, password) \
-    VALUES (${body.restaurant_name}, ${body.restaurant_description}, ${body.phone_number}, ${body.address}, ${body.password})`;
-    return await query(res, queries);
+    VALUES ('${body.restaurant_name}', '${body.restaurant_description}', '${body.phone_number}', '${body.address}', '${body.password}')`;
+    return await query(res, queries, 'POST');
 }
 
 module.exports = {
