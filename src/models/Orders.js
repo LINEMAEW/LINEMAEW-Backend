@@ -30,7 +30,6 @@ async function orderSpecificRestaurants(req, res) {
         console.log("Price:", totalPrice);
         let queries = `SELECT * FROM Orders WHERE order_date='${body.order_date}'`;
         let results = await query(res, queries);
-        // console.log(results);
         const insertToOrdersItems = `INSERT INTO Orders_items(order_id, item_id, quantity)
                     VALUES (${results[0].order_id}, ${body.menus[i].item_id}, ${body.menus[i].quantity})`;
         await query(res, insertToOrdersItems, 'POST')
@@ -51,9 +50,15 @@ async function setOrderStatus(req, res) {
     return await query(res, updated, 'PUT');
 }
 
+async function getOrderDetail(req, res) {
+    const queries = `SELECT menu_name, quantity FROM Orders_items, Menu_items WHERE order_id=${req.params.id} AND Orders_items.item_id=Menu_items.item_id`;
+    return await query(res, queries);
+}
+
 
 module.exports = {
     getAllOrders,
     orderSpecificRestaurants,
-    setOrderStatus
+    setOrderStatus,
+    getOrderDetail
 }

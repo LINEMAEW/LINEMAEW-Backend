@@ -19,4 +19,9 @@ router.post('/:id/add_menu', async (req, res) => {
     res.status(200).send("Add menu successfully.");
 })
 
+router.get('/:id/history', async (req, res) => {
+    const resp = await Restaurants.listOrderHistory(req, res);
+    res.status(200).send({ "order_history": resp });
+})
+
 module.exports = router;
