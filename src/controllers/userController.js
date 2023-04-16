@@ -2,10 +2,10 @@ const bcrypt = require('bcrypt');
 const Users = require('../models/Users');
 
 const loginUserController =  (req, res) => {
-    const { email, password } = req.body;
+    c
+    
 
     Users.getUser(req, res).then((user) => {
-        console.log(user);
 
         if (user) {
             let cmp = bcrypt.compare(password, user.password).then((match) => {
@@ -37,10 +37,10 @@ const registerUser = async (req, res) => {
 
 
 const registerRestaurant = async (req, res) => {
-    const { restaurant_name, description, password, phone_number, address } = req.body;
+    const { restaurant_name, description, phone_number, address, password } = req.body;
 
 
-    if (!username || !email || !password || !phone_number || !address) {
+    if (!restaurant_name || !description || !phone_number || !address || !password) {
         res.status(500).json({"message": 'Please fill in all fields'});
     }
 
@@ -48,24 +48,7 @@ const registerRestaurant = async (req, res) => {
     await Users.createUser(req, res)
 
 }
-// const banan = (req, res) => {
-//     User.create(req.body).then(() => {
-//         console.log("User registered successfully!")
-//         res.redirect('/');
-//     }).catch((error) => {
-//         // console.log(error.errors);
-//         if (error) {
-//             const validationErrors = Object.keys(error.errors).map(key => error.errors[key].message);
-//             req.flash('validationErrors', validationErrors);
-//             req.flash('data', req.body);
-//             return res.redirect('/register')
-//         }
-//     });
-// }
 
-const registerRestaurantController = (req, res) => {
-
-}
 
 module.exports = {
     loginUserController,

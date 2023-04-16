@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/login', async (req, res) => {
     await Users.getUser(req, res);
     res.status(200).send(`Logged in successfully`);
-})
+});
 
 router.post('/register', async (req, res) => {
     try{await userController.registerUser(req, res);}
@@ -17,5 +17,8 @@ router.post('/register', async (req, res) => {
 });
 
 
+// router.get('/nothing', async (req, res) => {
+//     await Users.nothing(req, res);
+// })
 
 module.exports = router;
