@@ -22,29 +22,17 @@ const loginUserController =  (req, res) => {
     })
 }
 
-const registerController = (req, res) => {
+const registerUser = async (req, res) => {
     const { username, email, password, phone_number, address } = req.body;
+
 
     if (!username || !email || !password || !phone_number || !address) {
         res.status(500).json({"message": 'Please fill in all fields'});
     }
 
-    let data = req.flash('data')[0]
 
-    console.log(data);
+    await Users.createUser(req, res)
 
-    if (typeof data != "undefined") {
-        email = data.email;
-        password = data.password;
-    }
-
-
-        
-    res.render('register', {
-            errors: req.flash('validationErrors'),
-            email: email,
-            password: password
-    });
 }
 
 // const banan = (req, res) => {
@@ -68,5 +56,5 @@ const registerRestaurantController = (req, res) => {
 
 module.exports = {
     loginUserController,
-    registerUserController,
+    registerUser
 }
