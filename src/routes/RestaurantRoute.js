@@ -4,6 +4,11 @@ const Menus = require('../models/Menus')
 
 const router = express.Router();
 
+router.get('/login', async(req, res) => {
+    const restaurants = await Restaurants.getSpecificRestaurant(req, res);
+    res.status(200).send("Logged in successfully");
+})
+
 router.get('/all', async (req, res) => {
     const restaurants = await Restaurants.getAllRestaurants(req, res);
     res.status(200).send({"all_restaurants": restaurants});
