@@ -35,6 +35,19 @@ const registerUser = async (req, res) => {
 
 }
 
+
+const registerRestaurant = async (req, res) => {
+    const { restaurant_name, description, password, phone_number, address } = req.body;
+
+
+    if (!username || !email || !password || !phone_number || !address) {
+        res.status(500).json({"message": 'Please fill in all fields'});
+    }
+
+
+    await Users.createUser(req, res)
+
+}
 // const banan = (req, res) => {
 //     User.create(req.body).then(() => {
 //         console.log("User registered successfully!")
