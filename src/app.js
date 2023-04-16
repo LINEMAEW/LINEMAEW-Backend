@@ -8,7 +8,8 @@ require('dotenv').config()
 
 const app = express();
 
-global.loggedIn = null;
+global.userloggedIn = null;
+global.restaurantloggedIn = null;
 
 app.use(cors());
 app.use(express.json());
@@ -18,7 +19,11 @@ app.use(expressSession({
     secret: process.env.SECRET
 }))
 app.use("*", (req, res, next) => {
-    loggedIn = req.session.userId;
+    userloggedIn = req.session.userId;
+    next();
+})
+app.use("*", (req, res, next) => {
+    restaurantloggedIn = req.session.restaurantId
     next();
 })
 

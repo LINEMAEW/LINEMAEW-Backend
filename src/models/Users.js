@@ -7,21 +7,15 @@ async function getUser(req, res) {
         email: req.body.email,
         password: req.body.password
     }
-    console.log(body);
-    await bcrypt.hash(body.password, parseInt(process.env.SALTROUNDS)).then(hash => {
-        body.password = hash;
-    }).catch(error => {
-        console.log(error);
-    });
-    const queries = `SELECT email, password FROM Users 
-                    WHERE email='${body.email}' AND password='${body.password}'`;
+    const queries = `SELECT * FROM Users 
+                    WHERE email='${body.email}'`;
     return await query(res, queries);
 }
 
 async function createUser(req, res) {
 
     if ((await getUser(req, res)).length > 0 ){
-        throw 'User already exists';
+        throw 'This user already exists';
     }
 
     const body = {
