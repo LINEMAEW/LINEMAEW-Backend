@@ -3,9 +3,15 @@
 
 ## Install and run
 
-to start server just type
+To start server just type
 
 ```sh
 yarn install
 yarn start
+```
+
+To add more dependencies
+
+```sh
+yarn add <dependency>
 ```
