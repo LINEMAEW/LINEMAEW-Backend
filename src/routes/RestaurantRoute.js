@@ -1,6 +1,7 @@
 const express = require('express');
 const Restaurants = require('../models/Restaurants');
 const Menus = require('../models/Menu')
+const registerRestaurantController = require('../controllers/restaurantController')
 
 const router = express.Router();
 
@@ -35,7 +36,7 @@ router.get('/:id/history', async (req, res) => {
 
 router.post('/register', async (req, res) => {
     try {
-        await Restaurants.createRestaurant(req, res);}
+        await registerRestaurantController.registerRestaurant(req, res);}
     catch(err) {
         res.status(403).json({"err": err})
         return

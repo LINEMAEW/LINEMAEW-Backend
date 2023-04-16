@@ -2,8 +2,7 @@ const bcrypt = require('bcrypt');
 const Users = require('../models/Users');
 
 const loginUserController =  (req, res) => {
-    c
-    
+    const { email, password } = req.body;
 
     Users.getUser(req, res).then((user) => {
 
@@ -34,21 +33,6 @@ const registerUser = async (req, res) => {
     await Users.createUser(req, res)
 
 }
-
-
-const registerRestaurant = async (req, res) => {
-    const { restaurant_name, description, phone_number, address, password } = req.body;
-
-
-    if (!restaurant_name || !description || !phone_number || !address || !password) {
-        res.status(500).json({"message": 'Please fill in all fields'});
-    }
-
-
-    await Users.createUser(req, res)
-
-}
-
 
 module.exports = {
     loginUserController,
