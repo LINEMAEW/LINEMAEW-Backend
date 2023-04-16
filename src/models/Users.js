@@ -2,7 +2,7 @@ const query = require('../utils/query');
 const bcrypt = require('bcrypt');
 require('dotenv').config()
 
-async function getAllUsers(req, res) {
+async function getUser(req, res) {
     const body = {
         email: req.body.email,
         password: req.body.password
@@ -17,6 +17,13 @@ async function getAllUsers(req, res) {
     return await query(res, queries);
 }
 
+async function createUser(username, email, password, phone_number, address) {
+    const queries = `INSERT INTO Users (username, email, password, phone_number, address)\
+    VALUES (${username}, ${email}, ${password}, ${phone_number}, ${address})`;
+    return await query(res, queries, 'POST');
+}
+
 module.exports = {
-    getAllUsers
+    getUser,
+    createUser
 }

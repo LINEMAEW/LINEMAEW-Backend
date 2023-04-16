@@ -36,5 +36,4 @@ module.exports = {
     getAllRestaurants,
     getSpecificRestaurant,
     listOrderHistory
-
 }

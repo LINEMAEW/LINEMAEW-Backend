@@ -4,7 +4,7 @@ const Users = require('../models/Users');
 const loginUserController =  (req, res) => {
     const { email, password } = req.body;
 
-    Users.getAllUsers(req, res).then((user) => {
+    Users.getUser(req, res).then((user) => {
         console.log(user);
 
         if (user) {
@@ -23,16 +23,22 @@ const loginUserController =  (req, res) => {
 }
 
 const registerController = (req, res) => {
-    let email = "";
-    let password = "";
+    const { username, email, password, phone_number, address } = req.body;
+
+    if (!username || !email || !password || !phone_number || !address) {
+        res.status(500).json({"message": 'Please fill in all fields'});
+    }
+
     let data = req.flash('data')[0]
 
     console.log(data);
-        
+
     if (typeof data != "undefined") {
         email = data.email;
         password = data.password;
     }
+
+
         
     res.render('register', {
             errors: req.flash('validationErrors'),
@@ -55,8 +61,6 @@ const registerController = (req, res) => {
 //         }
 //     });
 // }
-
-// module.exports = 
 
 const registerRestaurantController = (req, res) => {
 

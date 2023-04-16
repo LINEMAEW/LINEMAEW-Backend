@@ -5,12 +5,12 @@ const UsersRouter = require('./UsersRoute')
 
 const router = require('express').Router();
 
-const redirectIfAuth = require('../middlewares/redirectIfAuth');
+const loginRequired = require('../middlewares/loginRequired');
 
 router.use('/restaurant', RestaurantRouter);
 router.use('/order', OrdersRouter);
 router.use('/menu', MenusRouter);
-router.use('/user', redirectIfAuth, UsersRouter);
+router.use('/user', loginRequired, UsersRouter);
 
 
 module.exports = router;
