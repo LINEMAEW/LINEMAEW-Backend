@@ -6,7 +6,7 @@ const router = require('express').Router();
 
 
 router.use('/restaurants', RestaurantRouter);
-router.use('/orders', OrdersRouter);
+router.use('/order', OrdersRouter);
 router.use('/menu', MenusRouter);
 
 
