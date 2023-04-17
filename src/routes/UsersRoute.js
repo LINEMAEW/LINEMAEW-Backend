@@ -13,7 +13,7 @@ router.get('/login', async (req, res) => {
             req.session.userId = user[0].user_id
             res.status(200).send({
                 message: "Logged in successfully",
-                user_id: user[0].user_id
+                user: user[0]
             });
             // res.redirect() // redirect to somewhere maybe homepage
         } else {

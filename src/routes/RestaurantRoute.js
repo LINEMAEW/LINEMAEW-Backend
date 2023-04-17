@@ -14,7 +14,7 @@ router.get('/login', async (req, res) => {
             req.session.restaurantId = restaurant[0].restaurant_id
             res.status(200).send({
                 "message": "Logged in successfully",
-                "restaurant_id": restaurant[0].restaurant_id
+                "restaurant": restaurant[0]
             });
             // res.redirect() // redirect to somewhere maybe homepage
         } else {
