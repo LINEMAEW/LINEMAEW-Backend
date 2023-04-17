@@ -34,7 +34,7 @@ router.get('/all', async (req, res) => {
     res.status(200).send({ "all_restaurants": restaurants });
 });
 
-router.get('/:id/allmenus', async (req, res) => {
+router.get('/:id/all_menu', async (req, res) => {
     const menus = await Menus.getAllMenus(req, res);
     res.status(200).send({ "all_menus": menus });
 })
