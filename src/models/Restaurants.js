@@ -20,7 +20,7 @@ async function getSpecificRestaurant(req, res) {
 }
 
 async function listOrderHistory(req, res) {
-    const queries = `SELECT order_id, total_price, username AS customer_name,order_date, delivery_status AS status \
+    const queries = `SELECT order_id, total_price, username AS customer_name, Users.user_id, order_date, delivery_status AS status \
     FROM Orders, Users WHERE restaurant_id=${req.params.id} AND Orders.user_id=Users.user_id`;
     return await query(res, queries);
 }
@@ -36,7 +36,7 @@ async function createRestaurant(req, res) {
         phone_number: req.body.phone_number,
         address: req.body.address,
         password: req.
-        body.password
+            body.password
     }
     await bcrypt.hash(body.password, parseInt(process.env.SALTROUNDS)).then(hash => {
         body.password = hash;
