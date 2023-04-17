@@ -23,7 +23,7 @@ async function query(res, queries, type='GET') {
 
     try {
         await pool.connect();
-        var result = await req.query(queries)
+        let result = await req.query(queries)
         if (type=='GET') {
             if (result.recordsets.length > 0) {
                 console.log(result.recordset);
