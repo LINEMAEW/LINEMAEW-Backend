@@ -12,7 +12,6 @@ async function orderSpecificRestaurants(req, res) {
         order_date: req.body.order_date,
         menus: req.body.menus
     };
-    // console.log(body);
     async function calculatePrice(item) {
         console.log("item_id: ", item["item_id"], "quantity: ", item["quantity"]);
         let queries = `SELECT * FROM Menu_items 
