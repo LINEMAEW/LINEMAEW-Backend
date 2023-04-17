@@ -6,13 +6,16 @@ const restaurantController = require('../controllers/restaurantController')
 
 const router = express.Router();
 
-router.get('/login', async(req, res) => {
+router.get('/login', async (req, res) => {
     let restaurant = await Restaurants.getSpecificRestaurant(req, res);
     console.log(restaurant[0].password);
     await bcrypt.compare(req.body.password, restaurant[0].password).then((match) => {
         if (match) {
             req.session.restaurantId = restaurant[0].restaurant_id
-            res.status(200).send("Logged in successfully");
+            res.status(200).send({
+                "message": "Logged in successfully",
+                "restaurant_id": restaurant[0].restaurant_id
+            });
             // res.redirect() // redirect to somewhere maybe homepage
         } else {
             res.status(401).send("Failed to log in");
@@ -48,9 +51,10 @@ router.get('/:id/history', async (req, res) => {
 
 router.post('/register', async (req, res) => {
     try {
-        await restaurantController.registerRestaurant(req, res);}
-    catch(err) {
-        res.status(403).json({"err": err})
+        await restaurantController.registerRestaurant(req, res);
+    }
+    catch (err) {
+        res.status(403).json({ "err": err })
         return
     }
     res.status(200).send(`Restaurant registered successfully`);

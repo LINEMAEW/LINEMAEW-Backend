@@ -11,7 +11,10 @@ router.get('/login', async (req, res) => {
     await bcrypt.compare(req.body.password, user[0].password).then((match) => {
         if (match) {
             req.session.userId = user[0].user_id
-            res.status(200).send("Logged in successfully");
+            res.status(200).send({
+                message: "Logged in successfully",
+                user_id: user[0].user_id
+            });
             // res.redirect() // redirect to somewhere maybe homepage
         } else {
             res.status(401).send("Failed to log in");
@@ -27,9 +30,10 @@ router.get('/login', async (req, res) => {
 
 router.post('/register', async (req, res) => {
     try {
-        await userController.registerUser(req, res);}
-    catch(err) {
-        res.status(403).json({"err": err})
+        await userController.registerUser(req, res);
+    }
+    catch (err) {
+        res.status(403).json({ "err": err })
         return
     }
     res.status(200).send(`User registered successfully`);
