@@ -29,8 +29,8 @@ async function query(res, queries, type='GET') {
                 console.log(result.recordset);
                 return result.recordset;
             } 
-                console.log('There is no data in the table');
-                return [];
+            console.log('There is no data in the table');
+            return [];
         }
         console.log("Rows affected: ", result.rowsAffected[0])
     } catch (err) {
