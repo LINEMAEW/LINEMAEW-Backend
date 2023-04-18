@@ -3,7 +3,7 @@ const Orders = require('../models/Orders')
 
 const router = express.Router();
 
-router.get('/all', async (req, res) => {
+router.get('/all/:user_id', async (req, res) => {
     const orders = await Orders.getAllOrders(req, res);
     res.status(200).send({ "all_orders": orders });
 })
