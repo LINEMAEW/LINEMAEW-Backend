@@ -24,11 +24,11 @@ async function deleteMenu(req, res) {
 
 async function editMenu(req, res) {
     const body = {
-        "menu_name": req.body.menu_name,
+        "menu": req.body.menu,
         "description": req.body.description,
         "price": req.body.price
     };
-    const updated = `UPDATE Menu_items SET menu_name='${body.menu_name}', menu_description='${body.description}', price=${body.price} WHERE item_id=${req.params.id}`;
+    const updated = `UPDATE Menu_items SET menu_name='${body.menu}', menu_description='${body.description}', price=${body.price} WHERE item_id=${req.params.id}`;
     return await query(res, updated, 'PUT');
 }
 
