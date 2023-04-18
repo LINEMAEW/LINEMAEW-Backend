@@ -23,14 +23,14 @@ async function query(res, queries, type='GET') {
 
     try {
         await pool.connect();
-        var result = await req.query(queries)
+        let result = await req.query(queries)
         if (type=='GET') {
             if (result.recordsets.length > 0) {
                 console.log(result.recordset);
                 return result.recordset;
             } 
-                console.log('There is no data in the table');
-                return [];
+            console.log('There is no data in the table');
+            return [];
         }
         console.log("Rows affected: ", result.rowsAffected[0])
     } catch (err) {
